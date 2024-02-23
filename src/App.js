@@ -28,12 +28,13 @@ export default App;
 
 import React from "react";
 import "./App.css";
-import HelloWorld from "./1stLab";
+import { HelloWorld, MyComponent, ToggleButton } from "./1stLab";
 
 function App() {
   return (
     <div className="App">
-      <HelloWorld />
+      <MyComponent />
+      <ToggleButton />     
     </div>
   );
 }
