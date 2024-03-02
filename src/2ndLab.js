@@ -15,14 +15,14 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function SearchForm() {
   return (
-    <Navbar className="bg-body-secondary justify-content-end">
+    <Navbar className="bg-body-secondary justify-content-end px-4">
       <Form>
         <Row>
           <Col xs="auto">
             <FormControl type="text" placeholder="Поиск" className="mr-sm-2" />
           </Col>
-          <Col xs="auto">
-            <Button variant="secondary" style={{ marginRight: "30px" }}>
+          <Col xs="auto" className="p-0">
+            <Button variant="secondary" style={{ marginRight: "0px" }}>
               <FontAwesomeIcon icon={faSearch} />
             </Button>
           </Col>
