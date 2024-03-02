@@ -29,12 +29,13 @@ export default App;
 import React from "react";
 import "./App.css";
 import { HelloWorld, MyComponent, ToggleButton } from "./1stLab";
+import { DinosaurInfo, SearchForm } from "./2ndLab";
 
 function App() {
   return (
-    <div className="App">
-      <MyComponent />
-      <ToggleButton />     
+    <div className="App bg-info" style={{ "--bs-bg-opacity": 0.05 }}>
+      <SearchForm />
+      <DinosaurInfo />
     </div>
   );
 }
