@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, FormControl } from "react-bootstrap";
 
 function InputOutputField() {
   const [inputText, setInputText] = useState("");
@@ -19,7 +19,7 @@ function InputOutputField() {
     <Container>
       <Row className="my-3">
         <Col>
-          <Form.Control
+          <FormControl
             type="text"
             placeholder="Введите текст"
             value={inputText}
@@ -29,7 +29,7 @@ function InputOutputField() {
       </Row>
       <Row className="my-3">
         <Col>
-          <Form.Control
+          <FormControl
             type="text"
             placeholder=""
             value={outputText}
