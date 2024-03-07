@@ -31,7 +31,7 @@ function InputOutputField() {
         <Col>
           <Form.Control
             type="text"
-            placeholder="Вывод текста"
+            placeholder=""
             value={outputText}
             readOnly
             disabled
