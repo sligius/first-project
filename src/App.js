@@ -30,12 +30,14 @@ import React from "react";
 import "./App.css";
 import { HelloWorld, MyComponent, ToggleButton } from "./1stLab";
 import { DinosaurInfo, SearchForm } from "./2ndLab";
+import InputOutputField from "./3rdLab";
 
 function App() {
   return (
     <div className="App bg-info" style={{ "--bs-bg-opacity": 0.05 }}>
       <SearchForm />
       <DinosaurInfo />
+      <InputOutputField />
     </div>
   );
 }
