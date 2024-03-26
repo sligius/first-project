@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Container, FormControl } from "react-bootstrap";
+import { Card, Container, FormControl, Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLeaf,
@@ -9,6 +9,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function DinosaurCards() {
+  const dietMappings = {
+    Плотоядные: [faFishFins, faDrumstickBite],
+    Травоядные: [faLeaf],
+    Насекомоядные: [faBug],
+  };
+
   const dinosaurData = [
     {
       name: "Танистрофей",
@@ -73,10 +79,29 @@ function DinosaurCards() {
     },
   ];
 
+  const uniquePeriods = [
+    ...new Set(dinosaurData.map((dinosaur) => dinosaur.period)),
+  ];
+
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedDiet, setSelectedDiet] = useState(null);
+  const [selectedPeriod, setSelectedPeriod] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleSelectDiet = (event) => {
+    setSelectedDiet(event.target.value);
+  };
+
+  const handleSelectPeriod = (event) => {
+    setSelectedPeriod(event.target.value);
+  };
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
   };
 
   return (
@@ -89,16 +114,51 @@ function DinosaurCards() {
         maxWidth: "95%",
       }}
     >
-      <FormControl
-        type="text"
-        placeholder="Поиск"
-        className="mt-3 mb-3"
-        onChange={handleSearch}
-      />
+      <Container
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+          margin: "0 auto",
+          maxWidth: "100%",
+        }}
+      >
+        <FormControl
+          type="text"
+          placeholder="Поиск по имени"
+          className="mt-3 mb-3"
+          onChange={handleSearch}
+        />
+        <Button onClick={toggleFilters} className="ms-2 bg-dark">
+          Фильтры
+        </Button>
+      </Container>
+      {showFilters && (
+        <>
+          <Form.Select className="mt-3" onChange={handleSelectDiet}>
+            <option value="">Питание</option>
+            {Object.keys(dietMappings).map((diet) => (
+              <option key={diet}>{diet}</option>
+            ))}
+          </Form.Select>
+          <Form.Select className="mt-3" onChange={handleSelectPeriod}>
+            <option value="">Период</option>
+            {uniquePeriods.map((period) => (
+              <option key={period}>{period}</option>
+            ))}
+          </Form.Select>
+        </>
+      )}
       {dinosaurData
-        .filter((dinosaur) =>
-          dinosaur.name.toLowerCase().includes(searchTerm.toLowerCase())
+        .filter(
+          (dinosaur) =>
+            dinosaur.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (!showFilters ||
+              ((!selectedDiet ||
+                dietMappings[selectedDiet].includes(dinosaur.diet)) &&
+                (!selectedPeriod || dinosaur.period === selectedPeriod)))
         )
+
         .map((dinosaur, index) => (
           <Card
             key={index}
